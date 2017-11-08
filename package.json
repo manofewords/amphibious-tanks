@@ -1,0 +1,16 @@
+{
+  "name": "bm-web-assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+
+  },
+  "author": "BestMile",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^4.6.1",
+    "pubsub-js": "^1.5.7",
+    "uuid": "^3.1.0"
+  }
+}
