@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-
-const vehicleStatus = ["INACTIVE", "IDLE", "ACTIVE", "ERROR"];
+import { vehicleStatus } from "../constants";
 
 const PERCENTAGE_STATS_TYPE = "percentage";
 const NUMBER_STATS_TYPE = "number";   

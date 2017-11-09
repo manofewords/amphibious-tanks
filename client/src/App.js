@@ -3,6 +3,7 @@ import socketIOClient from "socket.io-client";
 import ReactMapGL, {Marker} from "react-map-gl";
 import FleetStatistics from "./components/FleetStatistics";
 import SearchableVehicleDetails from "./components/SearchableVehicleDetails";
+import { vehicleStatus } from "./constants";
 
 class App extends Component {
   constructor() {
@@ -21,8 +22,6 @@ class App extends Component {
     const { vehicles } = this.state;
 
     if(!vehicles || vehicles.length === 0) return null;
-
-    const vehicleStatus = ["INACTIVE", "IDLE", "ACTIVE", "ERROR"];
 
     var vehicleStyle = function(status, bearing) {
       const vehicleStatusColor = {
