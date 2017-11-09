@@ -11,15 +11,33 @@ class App extends Component {
 
     this.state = {
       vehicles: [],
-      focusedVehicleNumber: null
+      focusedVehicleId: null
     };
 
     this.handleFocusedVehicleNumberChange = this.handleFocusedVehicleNumberChange.bind(this);
+    this.handleFocusedVehicleIdChange = this.handleFocusedVehicleIdChange.bind(this);
   }
 
-  handleFocusedVehicleNumberChange(value) {
+  handleFocusedVehicleNumberChange(vehicleNumber) {
+    const { vehicles } = this.state;
+    const vehicle = vehicles.find(function(vehicle) {
+      return vehicle.name === "VHC-" + vehicleNumber;
+    });
+
+    if(vehicle) {
+      this.setState({
+        focusedVehicleId: vehicle.id
+      });
+    } else {
+      this.setState({
+        focusedVehicleId: null
+      });
+    }
+  }
+
+  handleFocusedVehicleIdChange(vehicleId) {
     this.setState({
-      focusedVehicleNumber: value
+      focusedVehicleId: vehicleId || null
     });
   }
 
@@ -29,18 +47,22 @@ class App extends Component {
   }
 
   render() {
-    const { vehicles, focusedVehicleNumber } = this.state;
+    const { vehicles, focusedVehicleId } = this.state;
 
     if(!vehicles || vehicles.length === 0) return null;
+
+    const focusedVehicle = vehicles.find(function(vehicle) {
+      return vehicle.id === focusedVehicleId;
+    });
 
     return (
       <div>
         <figure>
-          <FleetMap vehicles={ vehicles } focusedVehicleNumber={ focusedVehicleNumber }/>
+          <FleetMap vehicles={ vehicles } focusedVehicle={ focusedVehicle } onVehicleClick={ this.handleFocusedVehicleIdChange }/>
           <FleetMapLegend/>
         </figure>
         <FleetStatistics vehicles={ vehicles }/>
-        <SearchableVehicleDetails vehicles={ vehicles } vehicleNumber={ focusedVehicleNumber } onSearchTermChange={ this.handleFocusedVehicleNumberChange }/>
+        <SearchableVehicleDetails vehicles={ vehicles } focusedVehicle={ focusedVehicle } onSearchTermChange={ this.handleFocusedVehicleNumberChange }/>
       </div>
     );
   }

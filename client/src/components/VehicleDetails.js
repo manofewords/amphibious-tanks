@@ -4,7 +4,7 @@ class VehicleDetails extends Component {
   render() {
     const { vehicle } = this.props;
 
-    if(!vehicle) return null;
+    if(!vehicle || !vehicle.id) return null;
 
     return (
       <table>

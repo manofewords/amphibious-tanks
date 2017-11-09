@@ -5,7 +5,7 @@ import "../vehicleStatus.css";
 
 class VehicleMarker extends Component {
   render() {
-    const { vehicle } = this.props;
+    const { vehicle, onVehicleClick } = this.props;
 
     var vehicleStyle = function(bearing) {
       var style = {};
@@ -22,7 +22,12 @@ class VehicleMarker extends Component {
         latitude={ vehicle.position[1] } 
         longitude={ vehicle.position[0] } 
         key={ vehicle.id }>
-        <div className={ "vehicle-status-" + vehicleStatus[vehicle.status.id].toLowerCase() } style={ vehicleStyle(vehicle.bearing) }>⬆</div>
+        <div 
+          className={ "vehicle-status-" + vehicleStatus[vehicle.status.id].toLowerCase() } 
+          style={ vehicleStyle(vehicle.bearing) }
+          data-vehicle-id={ vehicle.id }
+          onClick={ onVehicleClick }
+          >⬆</div>
       </Marker>
     );
   }

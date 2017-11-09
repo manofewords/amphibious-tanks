@@ -6,6 +6,8 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const SAN_FRANCISCO_LATITUDE = 37.755705;
 const SAN_FRANCISCO_LONGITUDE = -122.447177;
 const ACCESS_TOKEN = "pk.eyJ1IjoibWFub2Zld29yZHMiLCJhIjoiY2o5c2ExZDQ1NjAyaDJxcXNtbzBjY2FjOSJ9.deGZaKnb9EoJKVl969U-HA";
+const DEFAULT_ZOOM_LEVEL = 8;
+const FOCUSED_ZOOM_LEVEL = 13;
 
 class FleetMap extends Component {
   constructor(props) {
@@ -17,11 +19,12 @@ class FleetMap extends Component {
         height: 400,
         latitude: SAN_FRANCISCO_LATITUDE,
         longitude: SAN_FRANCISCO_LONGITUDE,
-        zoom: 8
+        zoom: DEFAULT_ZOOM_LEVEL
       }
     };
 
     this.handleMapViewportChange = this.handleMapViewportChange.bind(this);
+    this.handleVehicleClick = this.handleVehicleClick.bind(this);
   }
 
   handleMapViewportChange(viewport) {    
@@ -30,25 +33,25 @@ class FleetMap extends Component {
     });
   }
 
+  handleVehicleClick(event) {
+    this.props.onVehicleClick(event.target.dataset.vehicleId);
+  }
+
   render() {
-    const { vehicles, focusedVehicleNumber } = this.props;
+    const { vehicles, focusedVehicle } = this.props;
     var { latitude, longitude, zoom } = this.state.viewport;
     const { width, height } = this.state.viewport;
 
     if(!vehicles || vehicles.length === 0) return null;
 
     var vehicleMarkers = vehicles.map(function(vehicle) {
-      return <VehicleMarker key={ vehicle.id } vehicle={ vehicle }/>;
-    });
+      return <VehicleMarker key={ vehicle.id } vehicle={ vehicle } onVehicleClick={ this.handleVehicleClick }/>;
+    }, this);
 
-    const focusedVehicle = vehicles.find(function(vehicle) {
-      return vehicle.name === "VHC-" + focusedVehicleNumber;
-    });
-
-    if(focusedVehicle) {
+    if(focusedVehicle && focusedVehicle.position) {
       latitude = focusedVehicle.position[1];
       longitude = focusedVehicle.position[0];
-      zoom = 13;
+      zoom = FOCUSED_ZOOM_LEVEL;
     }
 
     return (
@@ -59,7 +62,8 @@ class FleetMap extends Component {
         latitude={ latitude }
         longitude={ longitude }
         zoom={ zoom }
-        onViewportChange={ this.handleMapViewportChange }>
+        onViewportChange={ this.handleMapViewportChange }
+        onClick={ this.handleMapClick }>
         { vehicleMarkers }
         <div style={{position: "absolute", right: 0}}>
           <NavigationControl onViewportChange={ this.handleMapViewportChange }/>
