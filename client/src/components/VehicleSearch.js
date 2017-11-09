@@ -4,10 +4,15 @@ class VehicleSearch extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.resetForm = this.resetForm.bind(this);
   }
 
   handleChange(event) {
     this.props.onSearchTermChange(event.target.value);
+  }
+
+  resetForm() {
+    this.props.onSearchTermChange();
   }
 
   render() {
@@ -21,7 +26,11 @@ class VehicleSearch extends Component {
             name="vehicleNumber"
             type="number"
             value={ vehicleNumber === null ? "" : vehicleNumber}
-            onChange={ this.handleChange } />
+            onChange={ this.handleChange }/>
+          <input 
+            type="reset" 
+            value="Clear"
+            onClick={ this.resetForm }/>
         </label>
       </form>
     );
