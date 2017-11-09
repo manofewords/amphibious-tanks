@@ -20,7 +20,7 @@ class App extends Component {
 
     const vehicleStatus = ["INACTIVE", "IDLE", "ACTIVE", "ERROR"];
 
-    var vehicleSymbol = function(status) {
+    var vehicleStyle = function(status, bearing) {
       const vehicleStatusColor = {
         INACTIVE: "grey",
         IDLE: "orange", 
@@ -28,17 +28,28 @@ class App extends Component {
         ERROR: "red"
       };
 
-      return <span style={ {color: vehicleStatusColor[status]} }>•</span>;
+      var style = {};
+
+      if(status) {
+        style.color = vehicleStatusColor[status];
+      }
+      if(bearing) {
+        style.transform = "rotate(" + (bearing % 360) + "deg)";
+      }
+
+      return style;
     }
 
     var markers = vehicles.map(function(vehicle) {
       return <Marker latitude={ vehicle.position[1] } longitude={ vehicle.position[0] } key={ vehicle.id }>
-        { vehicleSymbol(vehicleStatus[vehicle.status.id]) }
+          <div style={ vehicleStyle(vehicleStatus[vehicle.status.id], vehicle.bearing) }>⬆</div>
         </Marker>;
     });
 
     var statusLegends = vehicleStatus.map(function(status) {
-      return <li key={ status }>{ vehicleSymbol(status) } { status.toLowerCase() }</li>;
+      return <li key={ status }>
+          <span style={ vehicleStyle(status) }>{ status.toLowerCase() }</span>
+        </li>;
     });
 
     return (
