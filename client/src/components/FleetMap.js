@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import ReactMapGL from "react-map-gl";
+import ReactMapGL, { NavigationControl } from "react-map-gl";
 import VehicleMarker from "./VehicleMarker";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 const SAN_FRANCISCO_LATITUDE = 37.755705;
 const SAN_FRANCISCO_LONGITUDE = -122.447177;
@@ -49,6 +50,9 @@ class FleetMap extends Component {
         zoom={ zoom }
         onViewportChange={ this.handleMapViewportChange }>
         { vehicleMarkers }
+        <div style={{position: "absolute", right: 0}}>
+          <NavigationControl onViewportChange={ this.handleMapViewportChange }/>
+        </div>
       </ReactMapGL>
     );
   }
