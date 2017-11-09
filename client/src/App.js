@@ -14,8 +14,12 @@ class App extends Component {
       focusedVehicleId: null
     };
 
-    this.handleFocusedVehicleNumberChange = this.handleFocusedVehicleNumberChange.bind(this);
-    this.handleFocusedVehicleIdChange = this.handleFocusedVehicleIdChange.bind(this);
+    this.handleFocusedVehicleNumberChange = this.handleFocusedVehicleNumberChange.bind(
+      this
+    );
+    this.handleFocusedVehicleIdChange = this.handleFocusedVehicleIdChange.bind(
+      this
+    );
   }
 
   handleFocusedVehicleNumberChange(vehicleNumber) {
@@ -24,7 +28,7 @@ class App extends Component {
       return vehicle.name === "VHC-" + vehicleNumber;
     });
 
-    if(vehicle) {
+    if (vehicle) {
       this.setState({
         focusedVehicleId: vehicle.id
       });
@@ -49,7 +53,7 @@ class App extends Component {
   render() {
     const { vehicles, focusedVehicleId } = this.state;
 
-    if(!vehicles || vehicles.length === 0) return null;
+    if (!vehicles || vehicles.length === 0) return null;
 
     const focusedVehicle = vehicles.find(function(vehicle) {
       return vehicle.id === focusedVehicleId;
@@ -58,11 +62,19 @@ class App extends Component {
     return (
       <div>
         <figure>
-          <FleetMap vehicles={ vehicles } focusedVehicle={ focusedVehicle } onVehicleClick={ this.handleFocusedVehicleIdChange }/>
-          <FleetMapLegend/>
+          <FleetMap
+            vehicles={vehicles}
+            focusedVehicle={focusedVehicle}
+            onVehicleClick={this.handleFocusedVehicleIdChange}
+          />
+          <FleetMapLegend />
         </figure>
-        <FleetStatistics vehicles={ vehicles }/>
-        <SearchableVehicleDetails vehicles={ vehicles } focusedVehicle={ focusedVehicle } onSearchTermChange={ this.handleFocusedVehicleNumberChange }/>
+        <FleetStatistics vehicles={vehicles} />
+        <SearchableVehicleDetails
+          vehicles={vehicles}
+          focusedVehicle={focusedVehicle}
+          onSearchTermChange={this.handleFocusedVehicleNumberChange}
+        />
       </div>
     );
   }

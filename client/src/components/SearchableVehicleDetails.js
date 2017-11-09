@@ -7,15 +7,18 @@ class SearchableVehicleDetails extends Component {
     const { focusedVehicle, onSearchTermChange } = this.props;
 
     var vehicleNumber = null;
-    if(focusedVehicle && focusedVehicle.name) {
+    if (focusedVehicle && focusedVehicle.name) {
       vehicleNumber = focusedVehicle.name.replace("VHC-", "");
     }
 
     return (
       <section>
         <h1>Vehicle details</h1>
-        <VehicleSearch vehicleNumber={ vehicleNumber } onSearchTermChange={ onSearchTermChange } />
-        <VehicleDetails vehicle={ focusedVehicle }/>
+        <VehicleSearch
+          vehicleNumber={vehicleNumber}
+          onSearchTermChange={onSearchTermChange}
+        />
+        <VehicleDetails vehicle={focusedVehicle} />
       </section>
     );
   }

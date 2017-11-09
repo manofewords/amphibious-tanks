@@ -25,12 +25,10 @@ class VehicleSearch extends Component {
           <input
             name="vehicleNumber"
             type="number"
-            value={ vehicleNumber === null ? "" : vehicleNumber}
-            onChange={ this.handleChange }/>
-          <input 
-            type="reset" 
-            value="Clear"
-            onClick={ this.resetForm }/>
+            value={vehicleNumber === null ? "" : vehicleNumber}
+            onChange={this.handleChange}
+          />
+          <input type="reset" value="Clear" onClick={this.resetForm} />
         </label>
       </form>
     );

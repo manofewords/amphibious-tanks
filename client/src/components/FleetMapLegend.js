@@ -8,18 +8,16 @@ class FleetMapLegend extends Component {
       status = status.toLowerCase();
 
       return (
-        <li key={ status }>
-          <span className={ "vehicle-status-" + status }>{ status }</span>
+        <li key={status}>
+          <span className={"vehicle-status-" + status}>{status}</span>
         </li>
       );
     });
 
     return (
       <figcaption>
-        <h1>Vehicle status</h1> 
-        <ul>
-          { statusLegends }
-        </ul>
+        <h1>Vehicle status</h1>
+        <ul>{statusLegends}</ul>
       </figcaption>
     );
   }

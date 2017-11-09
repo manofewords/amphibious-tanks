@@ -5,7 +5,8 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 const SAN_FRANCISCO_LATITUDE = 37.755705;
 const SAN_FRANCISCO_LONGITUDE = -122.447177;
-const ACCESS_TOKEN = "pk.eyJ1IjoibWFub2Zld29yZHMiLCJhIjoiY2o5c2ExZDQ1NjAyaDJxcXNtbzBjY2FjOSJ9.deGZaKnb9EoJKVl969U-HA";
+const ACCESS_TOKEN =
+  "pk.eyJ1IjoibWFub2Zld29yZHMiLCJhIjoiY2o5c2ExZDQ1NjAyaDJxcXNtbzBjY2FjOSJ9.deGZaKnb9EoJKVl969U-HA";
 const DEFAULT_ZOOM_LEVEL = 8;
 const FOCUSED_ZOOM_LEVEL = 13;
 
@@ -27,7 +28,7 @@ class FleetMap extends Component {
     this.handleVehicleClick = this.handleVehicleClick.bind(this);
   }
 
-  handleMapViewportChange(viewport) {    
+  handleMapViewportChange(viewport) {
     this.setState({
       viewport: viewport
     });
@@ -42,13 +43,19 @@ class FleetMap extends Component {
     var { latitude, longitude, zoom } = this.state.viewport;
     const { width, height } = this.state.viewport;
 
-    if(!vehicles || vehicles.length === 0) return null;
+    if (!vehicles || vehicles.length === 0) return null;
 
     var vehicleMarkers = vehicles.map(function(vehicle) {
-      return <VehicleMarker key={ vehicle.id } vehicle={ vehicle } onVehicleClick={ this.handleVehicleClick }/>;
+      return (
+        <VehicleMarker
+          key={vehicle.id}
+          vehicle={vehicle}
+          onVehicleClick={this.handleVehicleClick}
+        />
+      );
     }, this);
 
-    if(focusedVehicle && focusedVehicle.position) {
+    if (focusedVehicle && focusedVehicle.position) {
       latitude = focusedVehicle.position[1];
       longitude = focusedVehicle.position[0];
       zoom = FOCUSED_ZOOM_LEVEL;
@@ -56,17 +63,18 @@ class FleetMap extends Component {
 
     return (
       <ReactMapGL
-        mapboxApiAccessToken={ ACCESS_TOKEN }
-        width={ width }
-        height={ height }
-        latitude={ latitude }
-        longitude={ longitude }
-        zoom={ zoom }
-        onViewportChange={ this.handleMapViewportChange }
-        onClick={ this.handleMapClick }>
-        { vehicleMarkers }
-        <div style={{position: "absolute", right: 0}}>
-          <NavigationControl onViewportChange={ this.handleMapViewportChange }/>
+        mapboxApiAccessToken={ACCESS_TOKEN}
+        width={width}
+        height={height}
+        latitude={latitude}
+        longitude={longitude}
+        zoom={zoom}
+        onViewportChange={this.handleMapViewportChange}
+        onClick={this.handleMapClick}
+      >
+        {vehicleMarkers}
+        <div style={{ position: "absolute", right: 0 }}>
+          <NavigationControl onViewportChange={this.handleMapViewportChange} />
         </div>
       </ReactMapGL>
     );

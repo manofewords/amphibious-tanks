@@ -2,7 +2,7 @@
   color: grey;
 }
 .vehicle-status-idle {
-  color: orange
+  color: orange;
 }
 .vehicle-status-active {
   color: green;
