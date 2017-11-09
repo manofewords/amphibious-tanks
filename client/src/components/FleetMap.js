@@ -17,7 +17,7 @@ class FleetMap extends Component {
         height: 400,
         latitude: SAN_FRANCISCO_LATITUDE,
         longitude: SAN_FRANCISCO_LONGITUDE,
-        zoom:8
+        zoom: 8
       }
     };
 
@@ -31,14 +31,25 @@ class FleetMap extends Component {
   }
 
   render() {
-    const { vehicles } = this.props;
-    const { width, height, latitude, longitude, zoom } = this.state.viewport;
+    const { vehicles, focusedVehicleNumber } = this.props;
+    var { latitude, longitude, zoom } = this.state.viewport;
+    const { width, height } = this.state.viewport;
 
     if(!vehicles || vehicles.length === 0) return null;
 
     var vehicleMarkers = vehicles.map(function(vehicle) {
       return <VehicleMarker key={ vehicle.id } vehicle={ vehicle }/>;
     });
+
+    const focusedVehicle = vehicles.find(function(vehicle) {
+      return vehicle.name === "VHC-" + focusedVehicleNumber;
+    });
+
+    if(focusedVehicle) {
+      latitude = focusedVehicle.position[1];
+      longitude = focusedVehicle.position[0];
+      zoom = 13;
+    }
 
     return (
       <ReactMapGL

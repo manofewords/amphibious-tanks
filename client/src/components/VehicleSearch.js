@@ -21,7 +21,7 @@ class VehicleSearch extends Component {
             name="vehicleNumber"
             type="number"
             value={ vehicleNumber === null ? "" : vehicleNumber}
-            onChange={this.handleChange} />
+            onChange={ this.handleChange } />
         </label>
       </form>
     );

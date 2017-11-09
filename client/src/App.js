@@ -8,9 +8,19 @@ import SearchableVehicleDetails from "./components/SearchableVehicleDetails";
 class App extends Component {
   constructor() {
     super();
+
     this.state = {
-      vehicles: []
+      vehicles: [],
+      focusedVehicleNumber: null
     };
+
+    this.handleFocusedVehicleNumberChange = this.handleFocusedVehicleNumberChange.bind(this);
+  }
+
+  handleFocusedVehicleNumberChange(value) {
+    this.setState({
+      focusedVehicleNumber: value
+    });
   }
 
   componentDidMount() {
@@ -19,18 +29,18 @@ class App extends Component {
   }
 
   render() {
-    const { vehicles } = this.state;
+    const { vehicles, focusedVehicleNumber } = this.state;
 
     if(!vehicles || vehicles.length === 0) return null;
 
     return (
       <div>
         <figure>
-          <FleetMap vehicles={ vehicles }/>
+          <FleetMap vehicles={ vehicles } focusedVehicleNumber={ focusedVehicleNumber }/>
           <FleetMapLegend/>
         </figure>
         <FleetStatistics vehicles={ vehicles }/>
-        <SearchableVehicleDetails vehicles={ vehicles }/>
+        <SearchableVehicleDetails vehicles={ vehicles } vehicleNumber={ focusedVehicleNumber } onSearchTermChange={ this.handleFocusedVehicleNumberChange }/>
       </div>
     );
   }

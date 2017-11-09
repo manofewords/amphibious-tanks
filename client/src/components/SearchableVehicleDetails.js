@@ -3,25 +3,8 @@ import VehicleSearch from "./VehicleSearch";
 import VehicleDetails from "./VehicleDetails";
 
 class SearchableVehicleStatus extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      vehicleNumber: null
-    };
-
-    this.handleSearchTermChange = this.handleSearchTermChange.bind(this);
-  }
-
-  handleSearchTermChange(value) {
-    this.setState({
-      vehicleNumber: value
-    });
-  }
-
   render() {
-    const { vehicleNumber } = this.state;
-    const { vehicles } = this.props;
+    const { vehicles, vehicleNumber, onSearchTermChange } = this.props;
 
     const vehicle = vehicles.find(function(vehicle) {
       return vehicle.name === "VHC-" + vehicleNumber;
@@ -30,7 +13,7 @@ class SearchableVehicleStatus extends Component {
     return (
       <section>
         <h1>Vehicle details</h1>
-        <VehicleSearch vehicleNumber={ vehicleNumber } onSearchTermChange={ this.handleSearchTermChange } />
+        <VehicleSearch vehicleNumber={ vehicleNumber } onSearchTermChange={ onSearchTermChange } />
         <VehicleDetails vehicle={ vehicle }/>
       </section>
     );
