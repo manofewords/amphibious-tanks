@@ -1,0 +1,12 @@
+.vehicle-status-inactive {
+  color: grey;
+}
+.vehicle-status-idle {
+  color: orange
+}
+.vehicle-status-active {
+  color: green;
+}
+.vehicle-status-error {
+  color: red;
+}

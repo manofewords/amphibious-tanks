@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { vehicleStatus } from "../constants";
+import { vehicleStatus } from "../vehicleStatus";
 
 const PERCENTAGE_STATS_TYPE = "percentage";
 const NUMBER_STATS_TYPE = "number";   
@@ -48,7 +48,7 @@ class FleetStatistics extends Component {
   }
 
   render() {
-    const vehicles = this.props.vehicles;
+    const { vehicles } = this.props;
 
     if(!vehicles || vehicles.length === 0) return null;
 
