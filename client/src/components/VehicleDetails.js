@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class VehicleDetails extends Component {
   render() {
-    const vehicle = this.props.vehicle;
+    const { vehicle } = this.props;
 
     if(!vehicle) return null;
 

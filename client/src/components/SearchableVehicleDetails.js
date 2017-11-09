@@ -20,8 +20,8 @@ class SearchableVehicleStatus extends Component {
   }
 
   render() {
-    const vehicleNumber = this.state.vehicleNumber;
-    const vehicles = this.props.vehicles;
+    const { vehicleNumber } = this.state;
+    const { vehicles } = this.props;
 
     const vehicle = vehicles.find(function(vehicle) {
       return vehicle.name === "VHC-" + vehicleNumber;

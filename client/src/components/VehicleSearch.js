@@ -11,6 +11,8 @@ class VehicleSearch extends Component {
   }
 
   render() {
+    const { vehicleNumber } = this.props;
+
     return (
       <form>
         <label>
@@ -18,7 +20,7 @@ class VehicleSearch extends Component {
           <input
             name="vehicleNumber"
             type="number"
-            value={ this.props.vehicleNumber === null ? "" : this.props.vehicleNumber}
+            value={ vehicleNumber === null ? "" : vehicleNumber}
             onChange={this.handleChange} />
         </label>
       </form>
