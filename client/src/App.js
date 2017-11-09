@@ -106,11 +106,13 @@ class App extends Component {
         </tr>;
     });
 
+    const ACCESS_TOKEN = "pk.eyJ1IjoibWFub2Zld29yZHMiLCJhIjoiY2o5c2ExZDQ1NjAyaDJxcXNtbzBjY2FjOSJ9.deGZaKnb9EoJKVl969U-HA";
+
     return (
       <div>
         <figure>
           <ReactMapGL
-            mapboxApiAccessToken="pk.eyJ1IjoibWFub2Zld29yZHMiLCJhIjoiY2o5c2ExZDQ1NjAyaDJxcXNtbzBjY2FjOSJ9.deGZaKnb9EoJKVl969U-HA"
+            mapboxApiAccessToken={ ACCESS_TOKEN }
             width={400}
             height={400}
             latitude={37.755705}
