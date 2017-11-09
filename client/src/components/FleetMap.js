@@ -7,8 +7,31 @@ const SAN_FRANCISCO_LONGITUDE = -122.447177;
 const ACCESS_TOKEN = "pk.eyJ1IjoibWFub2Zld29yZHMiLCJhIjoiY2o5c2ExZDQ1NjAyaDJxcXNtbzBjY2FjOSJ9.deGZaKnb9EoJKVl969U-HA";
 
 class FleetMap extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      viewport: {
+        width: 400,
+        height: 400,
+        latitude: SAN_FRANCISCO_LATITUDE,
+        longitude: SAN_FRANCISCO_LONGITUDE,
+        zoom:8
+      }
+    };
+
+    this.handleMapViewportChange = this.handleMapViewportChange.bind(this);
+  }
+
+  handleMapViewportChange(viewport) {    
+    this.setState({
+      viewport: viewport
+    });
+  }
+
   render() {
     const { vehicles } = this.props;
+    const { width, height, latitude, longitude, zoom } = this.state.viewport;
 
     if(!vehicles || vehicles.length === 0) return null;
 
@@ -19,11 +42,12 @@ class FleetMap extends Component {
     return (
       <ReactMapGL
         mapboxApiAccessToken={ ACCESS_TOKEN }
-        width={400}
-        height={400}
-        latitude={SAN_FRANCISCO_LATITUDE}
-        longitude={SAN_FRANCISCO_LONGITUDE}
-        zoom={8}>
+        width={ width }
+        height={ height }
+        latitude={ latitude }
+        longitude={ longitude }
+        zoom={ zoom }
+        onViewportChange={ this.handleMapViewportChange }>
         { vehicleMarkers }
       </ReactMapGL>
     );
