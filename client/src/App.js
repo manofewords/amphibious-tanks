@@ -113,8 +113,8 @@ class App extends Component {
             mapboxApiAccessToken="pk.eyJ1IjoibWFub2Zld29yZHMiLCJhIjoiY2o5c2ExZDQ1NjAyaDJxcXNtbzBjY2FjOSJ9.deGZaKnb9EoJKVl969U-HA"
             width={400}
             height={400}
-            latitude={37.7577}
-            longitude={-122.4376}
+            latitude={37.755705}
+            longitude={-122.447177}
             zoom={8}>
             { markers }
           </ReactMapGL>
