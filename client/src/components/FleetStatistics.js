@@ -1,11 +1,26 @@
 import React, { Component } from "react";
 import { vehicleStatus } from "../vehicleStatus";
+import { SmoothieChart, TimeSeries } from "smoothie";
 
 const PERCENTAGE_STATS_TYPE = "percentage";
 const NUMBER_STATS_TYPE = "number";
 
 class FleetStatistics extends Component {
+  constructor(props) {
+    super(props);
+
+    var state = {};
+    const statistics = this.calculateStatistics();
+    statistics.forEach(function(statistic) {
+      state[statistic.id] = new TimeSeries();
+    });
+
+    this.state = state;
+  }
+
   calculateStatistics(vehicles) {
+    vehicles = vehicles || [];
+
     var statistics = [],
       occupancyRatio = 0,
       travelerTotal = 0,
@@ -27,7 +42,7 @@ class FleetStatistics extends Component {
       {
         id: "occupancyRatio",
         description: "occupancy ratio of the vehicles",
-        value: occupancyRatio / fleetSize,
+        value: fleetSize ? occupancyRatio / fleetSize : 0,
         type: PERCENTAGE_STATS_TYPE
       },
       {
@@ -42,12 +57,21 @@ class FleetStatistics extends Component {
       statistics.push({
         id: "statusRatio" + status,
         description: "ratio of vehicles in " + status + " state",
-        value: vehicleStatusTotal[status] / fleetSize,
+        value: fleetSize ? vehicleStatusTotal[status] / fleetSize : 0,
         type: PERCENTAGE_STATS_TYPE
       });
     }
 
     return statistics;
+  }
+
+  componentDidMount() {
+    const statistics = this.calculateStatistics();
+    statistics.forEach(function(statistic) {
+      const smoothie = new SmoothieChart();
+      smoothie.streamTo(document.getElementById(statistic.id));
+      smoothie.addTimeSeries(this.state[statistic.id]);
+    }, this);
   }
 
   render() {
@@ -58,6 +82,8 @@ class FleetStatistics extends Component {
     const statistics = this.calculateStatistics(vehicles);
 
     var statisticsRow = statistics.map(function(statistic) {
+      this.state[statistic.id].append(new Date().getTime(), statistic.value); // uhm... not supposed to set the state like that?
+
       return (
         <tr key={statistic.id}>
           <td>{statistic.description}</td>
@@ -66,9 +92,12 @@ class FleetStatistics extends Component {
               ? +Math.round(statistic.value * 100) + "%"
               : statistic.value}
           </td>
+          <td>
+            <canvas id={statistic.id} width="400" height="100"/>
+          </td>
         </tr>
       );
-    });
+    }, this);
 
     return (
       <section>
