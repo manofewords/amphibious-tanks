@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import socketIOClient from "socket.io-client";
-import ReactMapGL, {Marker} from 'react-map-gl';
+import ReactMapGL, {Marker} from "react-map-gl";
+import SearchableVehicleDetails from "./components/SearchableVehicleDetails";
 
 class App extends Component {
   constructor() {
@@ -136,6 +137,8 @@ class App extends Component {
             </tbody>
           </table>
         </section>
+
+        <SearchableVehicleDetails vehicles={ vehicles }/>
       </div>
     );
   }
