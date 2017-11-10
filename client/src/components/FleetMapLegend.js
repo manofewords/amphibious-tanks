@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { vehicleStatus } from "../vehicleStatus";
 import "../vehicleStatus.css";
+import "./fleetMapLegend.css";
 
 class FleetMapLegend extends Component {
   render() {
@@ -8,15 +9,12 @@ class FleetMapLegend extends Component {
       status = status.toLowerCase();
 
       return (
-        <li key={status}>
-          <span className={"vehicle-status-" + status}>{status}</span>
-        </li>
+        <li key={status} className={"vehicle-status-" + status}>{status}</li>
       );
     });
 
     return (
-      <figcaption>
-        <h1>Vehicle status</h1>
+      <figcaption className="fleet-map-legend">
         <ul>{statusLegends}</ul>
       </figcaption>
     );

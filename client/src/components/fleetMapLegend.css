@@ -1,0 +1,7 @@
+.fleet-map-legend ul {
+    max-width: 490px; /* same as map */
+    display: flex;
+}
+.fleet-map-legend li {
+    flex: 1;
+}
