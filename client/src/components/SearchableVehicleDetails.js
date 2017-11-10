@@ -15,8 +15,8 @@ class SearchableVehicleDetails extends Component {
     const vehicleNumber = this.extractVehicleNumber(focusedVehicle);
 
     return (
-      <section>
-        <h1>Vehicle details</h1>
+      <section className="searchable-vehicle-details">
+        <h2>Vehicle details</h2>
         <VehicleSearch
           vehicleNumber={vehicleNumber}
           onSearchTermChange={onSearchTermChange}
