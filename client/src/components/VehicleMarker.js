@@ -4,18 +4,20 @@ import { vehicleStatus } from "../vehicleStatus";
 import "../vehicleStatus.css";
 
 class VehicleMarker extends Component {
+  vehicleStyle(bearing) {
+    var style = {};
+
+    if (bearing) {
+      style.transform = "rotate(" + bearing % 360 + "deg)";
+    }
+
+    return style;
+  }
+
   render() {
     const { vehicle, onVehicleClick } = this.props;
 
-    var vehicleStyle = function(bearing) {
-      var style = {};
-
-      if (bearing) {
-        style.transform = "rotate(" + bearing % 360 + "deg)";
-      }
-
-      return style;
-    };
+    if (!vehicle) return null;
 
     return (
       <Marker
@@ -27,7 +29,7 @@ class VehicleMarker extends Component {
           className={
             "vehicle-status-" + vehicleStatus[vehicle.status.id].toLowerCase()
           }
-          style={vehicleStyle(vehicle.bearing)}
+          style={this.vehicleStyle(vehicle.bearing)}
           data-vehicle-id={vehicle.id}
           onClick={onVehicleClick}
         >
