@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactMapGL, { NavigationControl } from "react-map-gl";
 import VehicleMarker from "./VehicleMarker";
 import "mapbox-gl/dist/mapbox-gl.css";
+import "./fleetMap.css";
 
 const SAN_FRANCISCO_LATITUDE = 37.755705;
 const SAN_FRANCISCO_LONGITUDE = -122.447177;
@@ -16,8 +17,8 @@ class FleetMap extends Component {
 
     this.state = {
       viewport: {
-        width: 400,
-        height: 400,
+        width: 490,
+        height: 490,
         latitude: SAN_FRANCISCO_LATITUDE,
         longitude: SAN_FRANCISCO_LONGITUDE,
         zoom: DEFAULT_ZOOM_LEVEL
@@ -73,7 +74,7 @@ class FleetMap extends Component {
         onClick={this.handleMapClick}
       >
         {vehicleMarkers}
-        <div style={{ position: "absolute", right: 0 }}>
+        <div className="map-navigation-container">
           <NavigationControl onViewportChange={this.handleMapViewportChange} />
         </div>
       </ReactMapGL>

@@ -21,8 +21,8 @@ it("handles viewport changes", () => {
 
   // default value
   expect(wrapper.state().viewport).toEqual({
-    width: 400,
-    height: 400,
+    width: 490,
+    height: 490,
     latitude: 37.755705,
     longitude: -122.447177,
     zoom: 8
