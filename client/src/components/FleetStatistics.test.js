@@ -13,37 +13,37 @@ it("calculates statistics, even when the vehicles fleet is empty", () => {
 
   expect(wrapper.instance().calculateStatistics()).toEqual([
     {
-      description: "occupancy ratio of the vehicles",
+      description: "Occupancy ratio of the vehicles",
       id: "occupancyRatio",
       type: "percentage",
       value: 0
     },
     {
-      description: "nb of travelers the fleet is serving",
+      description: "Nb of travelers the fleet is serving",
       id: "travelerTotal",
       type: "number",
       value: 0
     },
     {
-      description: "ratio of vehicles in INACTIVE state",
+      description: "Ratio of vehicles in INACTIVE state",
       id: "statusRatioINACTIVE",
       type: "percentage",
       value: 0
     },
     {
-      description: "ratio of vehicles in IDLE state",
+      description: "Ratio of vehicles in IDLE state",
       id: "statusRatioIDLE",
       type: "percentage",
       value: 0
     },
     {
-      description: "ratio of vehicles in ACTIVE state",
+      description: "Ratio of vehicles in ACTIVE state",
       id: "statusRatioACTIVE",
       type: "percentage",
       value: 0
     },
     {
-      description: "ratio of vehicles in ERROR state",
+      description: "Ratio of vehicles in ERROR state",
       id: "statusRatioERROR",
       type: "percentage",
       value: 0

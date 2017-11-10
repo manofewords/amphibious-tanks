@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { vehicleStatus } from "../vehicleStatus";
 import { SmoothieChart, TimeSeries } from "smoothie";
+import "./fleetStatistics.css";
 
 const PERCENTAGE_STATS_TYPE = "percentage";
 const NUMBER_STATS_TYPE = "number";
@@ -41,13 +42,13 @@ class FleetStatistics extends Component {
     statistics.push(
       {
         id: "occupancyRatio",
-        description: "occupancy ratio of the vehicles",
+        description: "Occupancy ratio of the vehicles",
         value: fleetSize ? occupancyRatio / fleetSize : 0,
         type: PERCENTAGE_STATS_TYPE
       },
       {
         id: "travelerTotal",
-        description: "nb of travelers the fleet is serving",
+        description: "Nb of travelers the fleet is serving",
         value: travelerTotal,
         type: NUMBER_STATS_TYPE
       }
@@ -56,7 +57,7 @@ class FleetStatistics extends Component {
     for (var status in vehicleStatusTotal) {
       statistics.push({
         id: "statusRatio" + status,
-        description: "ratio of vehicles in " + status + " state",
+        description: "Ratio of vehicles in " + status + " state",
         value: fleetSize ? vehicleStatusTotal[status] / fleetSize : 0,
         type: PERCENTAGE_STATS_TYPE
       });
@@ -69,7 +70,7 @@ class FleetStatistics extends Component {
     if (!this.graphs) return;
 
     this.graphs.forEach(function(container) {
-      const smoothie = new SmoothieChart();
+      const smoothie = new SmoothieChart({responsive: true});
       smoothie.streamTo(container, 1000);
       smoothie.addTimeSeries(this.state[container.dataset.statisticId]);
     }, this);
@@ -82,39 +83,36 @@ class FleetStatistics extends Component {
 
     const statistics = this.calculateStatistics(vehicles);
 
-    var statisticsRow = statistics.map(function(statistic) {
+    var statisticsElements = statistics.map(function(statistic) {
       this.state[statistic.id].append(new Date().getTime(), statistic.value); // uhm... not supposed to set the state like that?
 
       return (
-        <tr key={statistic.id}>
-          <td>{statistic.description}</td>
-          <td>
+        <div key={statistic.id}>
+          <div className="stat-description">{statistic.description}</div>
+          <div className="stat-value">
             {statistic.type === PERCENTAGE_STATS_TYPE
-              ? +Math.round(statistic.value * 100) + "%"
+              ? +Math.round(statistic.value * 100) + " [%]"
               : statistic.value}
-          </td>
-          <td>
-            <canvas
-              data-stastistic-id={statistic.id}
-              ref={element => {
-                this.graphs
-                  ? this.graphs.push(element)
-                  : (this.graphs = [element]);
-              }}
-              width="400"
-              height="100"
-            />
-          </td>
-        </tr>
+          </div>
+          <canvas
+            className="stat-graph"
+            data-statistic-id={statistic.id}
+            ref={element => {
+              this.graphs
+                ? this.graphs.push(element)
+                : (this.graphs = [element]);
+            }}
+          />
+        </div>
       );
     }, this);
 
     return (
-      <section>
-        <h1>Fleet statistics</h1>
-        <table>
-          <tbody>{statisticsRow}</tbody>
-        </table>
+      <section className="fleet-statistics">
+        <h2>Fleet statistics</h2>
+        <div className="stats-container">
+          {statisticsElements}
+        </div>
       </section>
     );
   }
