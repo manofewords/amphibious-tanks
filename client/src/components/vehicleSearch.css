@@ -1,0 +1,15 @@
+.vehicle-search input {
+  border: 1px solid #dddddd;
+  background: #444444;
+  color: #dddddd;
+  font-size: 1em;
+  outline: none;
+  margin-left: 1em;
+}
+.vehicle-search input[type="number"] {
+  width: 5em;
+}
+.vehicle-search input[type="reset"] {
+  cursor: pointer;
+  border-radius: 0.25em;
+}

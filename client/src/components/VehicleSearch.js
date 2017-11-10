@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./vehicleSearch.css";
 
 class VehicleSearch extends Component {
   constructor(props) {
@@ -19,17 +20,18 @@ class VehicleSearch extends Component {
     const { vehicleNumber } = this.props;
 
     return (
-      <form>
+      <form className="vehicle-search">
         <label>
           Vehicle number
           <input
+            placeholder="VHC-…"
             name="vehicleNumber"
             type="number"
             value={vehicleNumber === null ? "" : vehicleNumber}
             onChange={this.handleChange}
           />
-          <input type="reset" value="Clear" onClick={this.resetForm} />
         </label>
+        <input type="reset" value="Clear" onClick={this.resetForm} />
       </form>
     );
   }
