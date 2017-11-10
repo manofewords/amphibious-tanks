@@ -9,7 +9,9 @@ class FleetMapLegend extends Component {
       status = status.toLowerCase();
 
       return (
-        <li key={status} className={"vehicle-status-" + status}>{status}</li>
+        <li key={status} className={"vehicle-status-" + status}>
+          {status}
+        </li>
       );
     });
 

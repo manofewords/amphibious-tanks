@@ -70,7 +70,7 @@ class FleetStatistics extends Component {
     if (!this.graphs) return;
 
     this.graphs.forEach(function(container) {
-      const smoothie = new SmoothieChart({responsive: true});
+      const smoothie = new SmoothieChart({ responsive: true });
       smoothie.streamTo(container, 1000);
       smoothie.addTimeSeries(this.state[container.dataset.statisticId]);
     }, this);
@@ -110,9 +110,7 @@ class FleetStatistics extends Component {
     return (
       <section className="fleet-statistics">
         <h2>Fleet statistics</h2>
-        <div className="stats-container">
-          {statisticsElements}
-        </div>
+        <div className="stats-container">{statisticsElements}</div>
       </section>
     );
   }

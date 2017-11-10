@@ -8,7 +8,7 @@ class VehicleDetails extends Component {
 
     if (!vehicle || !vehicle.id) return null;
 
-    const status = (vehicleStatus[vehicle.status.id]).toLowerCase();
+    const status = vehicleStatus[vehicle.status.id].toLowerCase();
 
     return (
       <table className="vehicle-details">
@@ -47,7 +47,9 @@ class VehicleDetails extends Component {
           </tr>
           <tr>
             <td>Occupancy</td>
-            <td>{vehicle.occupancy} / {vehicle.max_occupancy}</td>
+            <td>
+              {vehicle.occupancy} / {vehicle.max_occupancy}
+            </td>
           </tr>
         </tbody>
       </table>

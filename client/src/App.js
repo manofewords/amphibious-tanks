@@ -87,7 +87,14 @@ class App extends Component {
           <FleetStatistics vehicles={vehicles} />
         </main>
         <footer>
-          <p>A <a href="https://github.com/manofewords/amphibious-tanks">coding assignment</a> for <a href="https://www.bestmile.com">BestMile</a> by <a href="http://plothole.net">Manu</a></p>
+          <p>
+            A{" "}
+            <a href="https://github.com/manofewords/amphibious-tanks">
+              coding assignment
+            </a>{" "}
+            for <a href="https://www.bestmile.com">BestMile</a> by{" "}
+            <a href="http://plothole.net">Manu</a>
+          </p>
           <p>November 2017</p>
         </footer>
       </div>
