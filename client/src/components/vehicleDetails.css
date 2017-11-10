@@ -1,0 +1,6 @@
+.vehicle-details td {
+  padding: 0.5em 1em 0em 0;
+}
+.vehicle-details td:last-child {
+  padding-right: 0;
+}

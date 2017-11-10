@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { vehicleStatus } from "../vehicleStatus";
+import "./vehicleDetails.css";
 
 class VehicleDetails extends Component {
   render() {
@@ -6,48 +8,46 @@ class VehicleDetails extends Component {
 
     if (!vehicle || !vehicle.id) return null;
 
+    const status = (vehicleStatus[vehicle.status.id]).toLowerCase();
+
     return (
-      <table>
+      <table className="vehicle-details">
         <tbody>
           <tr>
-            <td>name</td>
+            <td>Name</td>
             <td>{vehicle.name}</td>
           </tr>
           <tr>
-            <td>id</td>
+            <td>Id</td>
             <td>{vehicle.id}</td>
           </tr>
           <tr>
-            <td>status</td>
-            <td>{vehicle.status.id}</td>
+            <td>Status</td>
+            <td className={"vehicle-status-" + status}>{status}</td>
           </tr>
           <tr>
-            <td>status message</td>
+            <td>Message</td>
             <td>{vehicle.status.msg}</td>
           </tr>
           <tr>
-            <td>longitude</td>
-            <td>{vehicle.position[0]}</td>
+            <td>Longitude</td>
+            <td>{Number(vehicle.position[0]).toFixed(4)}</td>
           </tr>
           <tr>
-            <td>latitude</td>
-            <td>{vehicle.position[1]}</td>
+            <td>Latitude</td>
+            <td>{Number(vehicle.position[1]).toFixed(4)}</td>
           </tr>
           <tr>
-            <td>bearing</td>
-            <td>{vehicle.bearing}</td>
+            <td>Bearing</td>
+            <td>{Math.round(vehicle.bearing % 360)} [º]</td>
           </tr>
           <tr>
-            <td>speed</td>
-            <td>{vehicle.speed}</td>
+            <td>Speed</td>
+            <td>{Math.round(vehicle.speed)} [m/s]</td>
           </tr>
           <tr>
-            <td>occupancy</td>
-            <td>{vehicle.occupancy}</td>
-          </tr>
-          <tr>
-            <td>max_occupancy</td>
-            <td>{vehicle.max_occupancy}</td>
+            <td>Occupancy</td>
+            <td>{vehicle.occupancy} / {vehicle.max_occupancy}</td>
           </tr>
         </tbody>
       </table>
