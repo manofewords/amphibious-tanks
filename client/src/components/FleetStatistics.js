@@ -66,11 +66,12 @@ class FleetStatistics extends Component {
   }
 
   componentDidMount() {
-    const statistics = this.calculateStatistics();
-    statistics.forEach(function(statistic) {
+    if (!this.graphs) return;
+
+    this.graphs.forEach(function(container) {
       const smoothie = new SmoothieChart();
-      smoothie.streamTo(document.getElementById(statistic.id));
-      smoothie.addTimeSeries(this.state[statistic.id]);
+      smoothie.streamTo(container, 1000);
+      smoothie.addTimeSeries(this.state[container.dataset.statisticId]);
     }, this);
   }
 
@@ -93,7 +94,16 @@ class FleetStatistics extends Component {
               : statistic.value}
           </td>
           <td>
-            <canvas id={statistic.id} width="400" height="100"/>
+            <canvas
+              data-stastistic-id={statistic.id}
+              ref={element => {
+                this.graphs
+                  ? this.graphs.push(element)
+                  : (this.graphs = [element]);
+              }}
+              width="400"
+              height="100"
+            />
           </td>
         </tr>
       );
