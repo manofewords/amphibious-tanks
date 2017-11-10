@@ -3,13 +3,16 @@ import VehicleSearch from "./VehicleSearch";
 import VehicleDetails from "./VehicleDetails";
 
 class SearchableVehicleDetails extends Component {
+  extractVehicleNumber(vehicle) {
+    if (vehicle && vehicle.name) {
+      return vehicle.name.replace("VHC-", "");
+    }
+    return null;
+  }
+
   render() {
     const { focusedVehicle, onSearchTermChange } = this.props;
-
-    var vehicleNumber = null;
-    if (focusedVehicle && focusedVehicle.name) {
-      vehicleNumber = focusedVehicle.name.replace("VHC-", "");
-    }
+    const vehicleNumber = this.extractVehicleNumber(focusedVehicle);
 
     return (
       <section>
