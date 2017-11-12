@@ -1,7 +1,7 @@
 /* colors */
 
 body {
-  background: #444;
+  background: linear-gradient(#333, #666);
   color: #ccc;
 }
 a {
@@ -28,15 +28,18 @@ h2,
 h3 {
   font-family: "Lobster", cursive;
   margin: 0.5em 0;
+  text-shadow: 4px 4px 0px #000, 6px 6px 0px rgba(54, 54, 54, 0.3);
 }
 h1 {
   font-size: 4em;
 }
 h2 {
   font-size: 2em;
+  letter-spacing: 0.04em;
 }
 h3 {
   font-size: 1.5em;
+  letter-spacing: 0.03em;
 }
 header h1 {
   font-size: 11vw;
@@ -56,9 +59,7 @@ footer {
 /* app layout */
 
 .app-container {
-  padding: 0.25em;
-  width: 100vm;
-  height: 100vh;
+  padding: 0 0.5em;
   display: flex;
   flex-direction: column;
 }
