@@ -10,8 +10,8 @@ so this repository is called `amphibious-tanks`.
 
 After downloading the code, you should
 
-1. build the client app with `cd client/` and `npm run build` (or alternatively, use the dev code with `npm start`)
-1. start the server with `cd server/` and `node app.js`
+1. build the client app with `cd client/`, `npm install` and `npm run build` (or alternatively, use the dev code with `npm start`)
+1. start the server with `cd server/`, `npm install` and `node app.js`
 1. go to [http://localhost:3000/](http://localhost:3000/)
 
 ## Implementation notes
