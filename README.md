@@ -6,12 +6,12 @@ This is a small project for the monitoring of a fleet of vehicles. The [assignme
 
 so this repository is called `amphibious-tanks`.
 
-<img src="todo">
+![Amphibious tanks fleet monitoring][doc/assets/app.png]
 
 After downloading the code, you should
 
+1. build the client app with `cd client/` and `npm run build` (or alternatively, use the dev code with `npm start`)
 1. start the server with `cd server/` and `node app.js`
-1. build the client app with `cd client/` and `npm build`
 1. go to [http://localhost:3000/](http://localhost:3000/)
 
 ## Implementation notes
@@ -33,15 +33,15 @@ I chose to use Mapbox, just not to use the ubiquitous Google Maps. The [react-ma
 
 The vehicles are displayed as [⬆ arrows](components/VehicleMarker.js) to easily visualise the bearing. This is a unicode character that is actually displayed as an emoji on iOS (for example). To avoid this, I could use an SVG arrow, or an actual car icon. 
 
-<img src="todo">
+![the app on an iPad][doc/assets/ipad.jpeg]
 
 I haven't invested any time into trying to make the map responsive. This might be my biggest disappointment, because mobile/tablet friendliness is something I value very highly!
 
-<img src="todo">
+![improvement idea: make the map responsive, example on wide screen][doc/assets/notresponsive.png]
 
 The speed of the car could be represented with the size: bigger cars are faster cars. I'm not sure this is useful however. Another thing that would be nice is to show a "trail" of the last 30 or so positions:
 
-<img src="todo">
+![improvement idea: show a trail][doc/assets/trail.png]
 
 - [x] _Some vehicles can have problems and will raise them through an 'ERROR' status. This information is very important for the remote operator_
 
@@ -51,13 +51,9 @@ I'm using [colors to represent the states of the vehicles](client/src/vehicleSta
 
 I only provide the statistics suggested [in the handout](doc/assignment.md#instructions-). However, I thought it would be fun to show how the values change over time. I'm using [Smoothie Charts](http://smoothiecharts.org) to plot a time series for every statistic. This could be improved by having fixed Y axis and displaying target values. The error rates graphs could be stacked areas, since their total always amounts to 100%. 
 
-<img src="todo">
-<img src="todo">
-<img src="todo">
+![improvement idea: stacked area graph for vehicle status][doc/assets/stackedarea.png]
 
-- [x] _Provide a search function on the UI for the operator to select a single vehicle for advanced monitoring:
-  * Display more information about this vehicle
-  * Center the map on this vehicle_
+- [x] _Provide a search function on the UI for the operator to select a single vehicle for advanced monitoring_
   
 For the search input I chose the vehicle number. Typing a valid number will zoom in on the corresponding vehicle on the map, and show the vehicle's details. A "Clear" button will reset the search and zoom the map back out. It is also possible to view a vehicle's details by clicking on it on the map.
   
@@ -68,8 +64,6 @@ In order to stay in a reasonable time frame, I chose to only write component log
 - [x] _Please provide the full git history with the assignment_
 
 I haven't spent much time structuring the CSS code nicely. I'm not even using [Sass](http://sass-lang.com) or [PostCSS](http://postcss.org). I still wanted to try something new and went with [CSS grid layouts](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout), which [are now supported](https://caniuse.com/#feat=css-grid) on the latest versions of all browsers. I've started building some responsiveness – 2 columns grid on large screens, 1 column grid on small screens – but it's clearly not done.
-
-<img src="todo">
 
 ## Epilogue
 
