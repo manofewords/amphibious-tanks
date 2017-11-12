@@ -45,7 +45,7 @@ The speed of the car could be represented with the size: bigger cars are faster 
 
 - [x] _Some vehicles can have problems and will raise them through an 'ERROR' status. This information is very important for the remote operator_
 
-I'm using [colors to represent the states of the vehicles](client/src/vehicleStatus.css).
+I'm using [colors to represent the states of the vehicles](client/src/vehicleStatus.css). The error message is shown on the vehicle details, when you search for or click on a vehicle.
 
 - [x] _Provide statistics you feel are important to the operator or his company_
 
