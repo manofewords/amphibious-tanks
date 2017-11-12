@@ -31,7 +31,7 @@ I have close to no experience with [ReactJS](https://reactjs.org) so I opted for
 
 I chose to use Mapbox, just not to use the ubiquitous Google Maps. The [react-map-gl](https://uber.github.io/react-map-gl/#/) package, made by Uber, makes the integration into a React app a bit easier. 
 
-The vehicles are displayed as [⬆ arrows](components/VehicleMarker.js) to easily visualise the bearing. This is a unicode character that is actually displayed as an emoji on iOS (for example, see screenshot). To avoid this, I could use an SVG arrow, or an actual car icon. 
+The vehicles are displayed as [⬆ arrows](client/src/components/VehicleMarker.js) to easily visualise the bearing. This is a unicode character that is actually displayed as an emoji on iOS (for example, see screenshot). To avoid this, I could use an SVG arrow, or an actual car icon. 
 
 ![the app on an iPad](doc/assets/ipad.jpeg "the app on an iPad")
 
