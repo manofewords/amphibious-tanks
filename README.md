@@ -1,59 +1,76 @@
-# BestMile Web Engineer assignment
+# BestMile home assignment
 
-Welcome to the awesome world of connected, autonomous vehicles.
+This is a small project for the monitoring of a fleet of vehicles. The [assignment](doc/assignment.md) mentions that
 
-This Node.JS boilerplate is connected to a very robust distributed backend that manage a fleet of more than 500 vehicles.
-All these vehicles send real time data to this backend to be processed by very advanced, complicated algorithms.
+> Our vehicles are amphibious tanks.
 
-We made this data available for you in the file `index.js`. You can access it by listening to the topic `vehicles-status` as demonstrated.
+so this repository is called `amphibious-tanks`.
 
-*Your mission is to make this data available to the fleet manager (remote operator) through a web interface*
+<img src="todo">
 
-## Instructions :
+After downloading the code, you should
 
-* Expose the data through a Node.JS web server so it can be consumed by a web client
-* Create a very simple React application (you are allowed to use another framework if you think React could compromise your mission)
-* Consume the data and display it on a map (you can use any map framework you like: Google, Mapbox, OpenLayer, ...)
-* Make sure you display only relevant data to the operator (what relevant means is up to you. you may look into vehicle status, e.g.)
-* Some vehicles can have problems and will raise them through an 'ERROR' status. This information is very important for the remote operator
-* Provide statistics you feel are important to the operator or his company. Some example could be :
-  * occupancy ratio of the vehicles,
-  * error ratio of the vehicles,
-  * nb of travelers the fleet is serving/has served
-  * ... your pick ?
-* Provide a search function on the UI for the operator to select a single vehicle for advanced monitoring :
+1. start the server with `cd server/` and `node app.js`
+1. build the client app with `cd client/` and `npm build`
+1. go to [http://localhost:3000/](http://localhost:3000/)
+
+## Implementation notes
+
+- [x] _Expose the data through a Node.JS web server so it can be consumed by a web client_
+
+As it was not explicitly requested to provide an API endpoint for the web client, I thought it would be fun to try using sockets and update the vehicles map in realtime, using [socket.io](https://socket.io). I'm not so sure about the performance implication of this choice. If I were to go the API route after all, I would create a `/vehicles` endpoint answering to `GET` requests. The client would then poll the server every x seconds. One could even make the refresh rate a UI input that the user can adjust himself: `<input type="range" min="1" max="60" step="1">`
+
+- [x] _Create a very simple React application_
+
+I have close to no experience with [ReactJS](https://reactjs.org) so I opted for [create-react-app](https://github.com/facebookincubator/create-react-app). I'm usually not a big fan of boilerplate packages, because you always end up with code you don't need and forget to remove. Given my lack of experience it seemed fitting though. 
+
+[At some point](https://github.com/manofewords/amphibious-tanks/commit/6b8e75723d98a05bad04ded76d8dadbc9cf260d0), the state management of the application became a bit annoying. I think it would have been nicer to use something like [Redux](https://redux.js.org). Like for ReactJS, I have never used Redux, so I focused on finishing the home assignment in an acceptable time instead. I might still look into Redux after handing the assignment in, maybe on another branch.
+
+- [x] _Consume the data and display it on a map_
+- [x] _Make sure you display only relevant data to the operator_
+
+I chose to use Mapbox, just not to use the ubiquitous Google Maps. The [react-map-gl](https://uber.github.io/react-map-gl/#/) package, made by Uber, makes the integration into a React app a bit easier. 
+
+The vehicles are displayed as [⬆ arrows](components/VehicleMarker.js) to easily visualise the bearing. This is a unicode character that is actually displayed as an emoji on iOS (for example). To avoid this, I could use an SVG arrow, or an actual car icon. 
+
+<img src="todo">
+
+I haven't invested any time into trying to make the map responsive. This might be my biggest disappointment, because mobile/tablet friendliness is something I value very highly!
+
+<img src="todo">
+
+The speed of the car could be represented with the size: bigger cars are faster cars. I'm not sure this is useful however. Another thing that would be nice is to show a "trail" of the last 30 or so positions:
+
+<img src="todo">
+
+- [x] _Some vehicles can have problems and will raise them through an 'ERROR' status. This information is very important for the remote operator_
+
+I'm using [colors to represent the states of the vehicles](client/src/vehicleStatus.css).
+
+- [x] _Provide statistics you feel are important to the operator or his company_
+
+I only provide the statistics suggested [in the handout](doc/assignment.md#instructions-). However, I thought it would be fun to show how the values change over time. I'm using [Smoothie Charts](http://smoothiecharts.org) to plot a time series for every statistic. This could be improved by having fixed Y axis and displaying target values. The error rates graphs could be stacked areas, since their total always amounts to 100%. 
+
+<img src="todo">
+<img src="todo">
+<img src="todo">
+
+- [x] _Provide a search function on the UI for the operator to select a single vehicle for advanced monitoring:
   * Display more information about this vehicle
-  * Center the map on this vehicle
+  * Center the map on this vehicle_
+  
+For the search input I chose the vehicle number. Typing a valid number will zoom in on the corresponding vehicle on the map, and show the vehicle's details. A "Clear" button will reset the search and zoom the map back out. It is also possible to view a vehicle's details by clicking on it on the map.
+  
+- [x] _Make sure your web application is robust. Provide tests with your assignment_
 
-### Additional notes :
+In order to stay in a reasonable time frame, I chose to only write component logic tests, no rendering tests. These include [calculating the statistics](client/src/components/FleetStatistics.test.js), [correctly determining a vehicle's bearing](client/src/components/VehicleMarker.test.js), and others.
 
-* Make sure your web application is robust. Provide tests with your assignment
-* Please provide the full git history with the assignment
-* Our vehicles are amphibious tanks. Don't be surprised. They can go through walls and in the water.
+- [x] _Please provide the full git history with the assignment_
 
-## We'll evaluate the assignment according to the following criterias
+I haven't spent much time structuring the CSS code nicely. I'm not even using [Sass](http://sass-lang.com) or [PostCSS](http://postcss.org). I still wanted to try something new and went with [CSS grid layouts](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout), which [are now supported](https://caniuse.com/#feat=css-grid) on the latest versions of all browsers. I've started building some responsiveness – 2 columns grid on large screens, 1 column grid on small screens – but it's clearly not done.
 
-* Architecture of the front-end (framework/packages use, build scripts and optimization, tests, state management)
-* Architecture of the service (what and how data are exposed)
-* Code style and organization
-* Performance (especially for the front-end)
-* Bonus : UX
-  * Information hierarchy
-  * How and what information is presented (especially regarding the map)
-  * This part can be subjective and open to creativity
-* Bonus : relevant feedback about this assignment and how we can improve it :)
+<img src="todo">
 
-## Vehicle structure type
-```
- {
-   id: string
-   status: {
-     id:  number                 // INACTIVE = 0, IDLE = 1, ACTIVE = 2, ERROR = 3
-     msg: string
-   }
-   position: [number, number]    // [lng, lat]
-   bearing: number
-   speed: number                 // m/s
-   occupancy: number
- }
-```
+## Epilogue
+
+I enjoyed working on this little project because I could get back into [ReactJS](https://reactjs.org), try out [sockets](https://socket.io) and use a [CSS grid layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) for the first time. I also always have fun playing with maps. Thanks.
