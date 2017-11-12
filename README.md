@@ -6,7 +6,7 @@ This is a small project for the monitoring of a fleet of vehicles. The [assignme
 
 so this repository is called `amphibious-tanks`.
 
-![Amphibious tanks fleet monitoring][doc/assets/app.png]
+![Amphibious tanks fleet monitoring](doc/assets/app.png "Amphibious tanks fleet monitoring")
 
 After downloading the code, you should
 
@@ -31,17 +31,17 @@ I have close to no experience with [ReactJS](https://reactjs.org) so I opted for
 
 I chose to use Mapbox, just not to use the ubiquitous Google Maps. The [react-map-gl](https://uber.github.io/react-map-gl/#/) package, made by Uber, makes the integration into a React app a bit easier. 
 
-The vehicles are displayed as [⬆ arrows](components/VehicleMarker.js) to easily visualise the bearing. This is a unicode character that is actually displayed as an emoji on iOS (for example). To avoid this, I could use an SVG arrow, or an actual car icon. 
+The vehicles are displayed as [⬆ arrows](components/VehicleMarker.js) to easily visualise the bearing. This is a unicode character that is actually displayed as an emoji on iOS (for example, see screenshot). To avoid this, I could use an SVG arrow, or an actual car icon. 
 
-![the app on an iPad][doc/assets/ipad.jpeg]
+![the app on an iPad](doc/assets/ipad.jpeg "the app on an iPad")
 
 I haven't invested any time into trying to make the map responsive. This might be my biggest disappointment, because mobile/tablet friendliness is something I value very highly!
 
-![improvement idea: make the map responsive, example on wide screen][doc/assets/notresponsive.png]
+![improvement idea: make the map responsive, example on wide screen](doc/assets/notresponsive.png "improvement idea: make the map responsive, example on wide screen")
 
 The speed of the car could be represented with the size: bigger cars are faster cars. I'm not sure this is useful however. Another thing that would be nice is to show a "trail" of the last 30 or so positions:
 
-![improvement idea: show a trail][doc/assets/trail.png]
+![improvement idea: show a trail](doc/assets/trail.png "improvement idea: show a trail")
 
 - [x] _Some vehicles can have problems and will raise them through an 'ERROR' status. This information is very important for the remote operator_
 
@@ -49,9 +49,9 @@ I'm using [colors to represent the states of the vehicles](client/src/vehicleSta
 
 - [x] _Provide statistics you feel are important to the operator or his company_
 
-I only provide the statistics suggested [in the handout](doc/assignment.md#instructions-). However, I thought it would be fun to show how the values change over time. I'm using [Smoothie Charts](http://smoothiecharts.org) to plot a time series for every statistic. This could be improved by having fixed Y axis and displaying target values. The error rates graphs could be stacked areas, since their total always amounts to 100%. 
+I only provide the statistics suggested [in the handout](doc/assignment.md#instructions-). However, I thought it would be fun to show how the values change over time. I'm using [Smoothie Charts](http://smoothiecharts.org) to plot a time series for every statistic. This could be improved by having fixed Y axis and displaying target values. The error rates graphs could be stacked areas, since their total always amounts to 100%: 
 
-![improvement idea: stacked area graph for vehicle status][doc/assets/stackedarea.png]
+![improvement idea: stacked area graph for vehicle status](doc/assets/stackedarea.png "improvement idea: stacked area graph for vehicle status")
 
 - [x] _Provide a search function on the UI for the operator to select a single vehicle for advanced monitoring_
   
