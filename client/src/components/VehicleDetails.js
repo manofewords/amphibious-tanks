@@ -27,7 +27,7 @@ class VehicleDetails extends Component {
           </tr>
           <tr>
             <td>Message</td>
-            <td>{vehicle.status.msg}</td>
+            <td>{vehicle.status.msg || "-"}</td>
           </tr>
           <tr>
             <td>Longitude</td>
