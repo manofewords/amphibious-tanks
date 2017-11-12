@@ -59,7 +59,7 @@ For the search input I chose the vehicle number. Typing a valid number will zoom
   
 - [x] _Make sure your web application is robust. Provide tests with your assignment_
 
-In order to stay in a reasonable time frame, I chose to only write component logic tests, no rendering tests. These include [calculating the statistics](client/src/components/FleetStatistics.test.js), [correctly determining a vehicle's bearing](client/src/components/VehicleMarker.test.js), and others.
+In order to stay in a reasonable time frame, I chose to only write component logic tests, no rendering tests. These include [calculating the statistics](client/src/components/FleetStatistics.test.js), [correctly determining a vehicle's bearing](client/src/components/VehicleMarker.test.js), and others. The tests can be run in watch mode via `npm test`.
 
 - [x] _Please provide the full git history with the assignment_
 
