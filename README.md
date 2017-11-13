@@ -33,7 +33,7 @@ I chose to use Mapbox, just not to use the ubiquitous Google Maps. The [react-ma
 
 The vehicles are displayed as [⬆ arrows](client/src/components/VehicleMarker.js) to easily visualise the bearing. This is a unicode character that is actually displayed as an emoji on iOS (for example, see screenshot). To avoid this, I could use an SVG arrow, or an actual car icon. 
 
-![the app on an iPad](doc/assets/ipad.jpeg "the app on an iPad")
+![the app on an iPad](doc/assets/ipad.jpg "the app on an iPad")
 
 I haven't invested any time into trying to make the map responsive. This might be my biggest disappointment, because mobile/tablet friendliness is something I value very highly!
 

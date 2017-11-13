@@ -64,7 +64,7 @@ class App extends Component {
     return (
       <div className="app-container">
         <header>
-          <h1>Amphibian tanks</h1>
+          <h1>Amphibious tanks</h1>
           <h3>Fleet monitoring</h3>
         </header>
         <main>
